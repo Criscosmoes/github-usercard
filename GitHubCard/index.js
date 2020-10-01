@@ -116,7 +116,7 @@ const cardMaker = (data) => {
     user, and adding that card to the DOM.
 */
 
-const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell', 'thecodediver', 'jtwray', 'matt22881', 'eg180 ', 'kplynds'];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell', 'thecodediver', 'jtwray', 'matt22881', 'eg180 ', 'BWSIEVERT', 'CPower1248', 'juancaruizc' ];
 
 
 
