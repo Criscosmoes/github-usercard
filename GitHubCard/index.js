@@ -4,6 +4,28 @@
     https://api.github.com/users/<your name>
 */
 
+import axios from 'axios'; 
+
+
+ axios.get('https://api.github.com/users/Criscosmoes')
+.then(response => {
+
+  const card = cardMaker(response.data); 
+
+  console.log(card); 
+
+  entryPoint.appendChild(card); 
+})
+.catch(error => {
+  console.log(error); 
+})
+
+
+
+
+
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -11,6 +33,72 @@
 
     Skip to STEP 3.
 */
+
+const entryPoint = document.querySelector('.cards'); 
+
+const cardMaker = (data) => {
+
+
+  const mainDiv = document.createElement('div'); 
+  mainDiv.classList.add('card'); 
+
+  const img = document.createElement('img'); 
+  img.src = data.avatar_url; 
+
+  mainDiv.appendChild(img); 
+
+  const div = document.createElement('div'); 
+  div.classList.add('card-info'); 
+
+  mainDiv.appendChild(div); 
+
+  const h3 = document.createElement('h3'); 
+  h3.classList.add('name'); 
+  h3.textContent = data.name; 
+
+  div.appendChild(h3); 
+
+  const p1 = document.createElement('p'); 
+  p1.classList.add('username'); 
+  p1.textContent = data.login; 
+
+  div.appendChild(p1); 
+
+
+  const p2 = document.createElement('p'); 
+  p2.textContent = `Location: ${data.location}`; 
+   
+  div.appendChild(p2); 
+
+  const p3 = document.createElement('p'); 
+  const a = document.createElement('a'); 
+  p3.appendChild(a); 
+  a.href = data.html_url; 
+  a.textContent = 'Profile'
+
+  div.appendChild(p3); 
+
+
+  const p4 = document.createElement('p'); 
+  p4.textContent = `Followers: ${data.followers}`
+
+  div.appendChild(p4); 
+
+  const p5 = document.createElement('p'); 
+  p5.textContent = `Following: ${data.following}`
+
+  div.appendChild(p5); 
+
+  const p6 = document.createElement('p'); 
+  p6.textContent = `Bio: ${data.bio}`
+
+  div.appendChild(p6); 
+
+
+  return mainDiv; 
+
+}
+
 
 /*
   STEP 4: Pass the data received from Github into your function,
@@ -28,7 +116,9 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+
+
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,6 +139,30 @@ const followersArray = [];
       </div>
     </div>
 */
+
+
+
+
+const multipleCards = (namesArr) => {
+
+  namesArr.forEach(cur => {
+    axios.get('https://api.github.com/users/' + cur)
+    .then(response => {
+
+      const card = cardMaker(response.data); 
+
+      entryPoint.appendChild(card); 
+
+    })
+    .catch(error => {
+      console.log(error); 
+    })
+  }) 
+  
+}
+
+
+multipleCards(followersArray)
 
 /*
   List of LS Instructors Github username's:
